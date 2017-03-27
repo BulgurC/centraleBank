@@ -11,7 +11,7 @@ import javafx.scene.image.*;
 public class Gui extends Application
 {
 	Stage window;
-	Scene Welkom, Cardcode, Home, Snelpin, Saldo, Pinnen, Ander, Biljet, Bon;
+	Scene Welkom, Cardcode, Home, Snelpin, Saldo, Pinnen, Ander, Biljet, Bon, CardcodeEN, HomeEN, SnelpinEN, SaldoEN, PinnenEN, AnderEN, BiljetEN, BonEN;
 	
 	public static void main(String[] args)
 	{
@@ -41,7 +41,7 @@ public class Gui extends Application
         Home1.setTop(addHBoxTop());
         Home1.setLeft(addVBoxHome());
         Home1.setCenter(addStackPane());
-        Home1.setBottom(addHBoxHome());
+        Home1.setBottom(addHBoxCardcode());
 
         Home = new Scene(Home1, 300, 250);
         
@@ -93,6 +93,69 @@ public class Gui extends Application
         
     	Bon = new Scene(Bon1, 300, 250);
     	
+    	BorderPane CardcodeEN1 = new BorderPane();
+    	CardcodeEN1.setTop(addHBoxTop());
+    	CardcodeEN1.setCenter(addGridPaneCardcodeEN());
+    	CardcodeEN1.setBottom(addHBoxCardcodeEN());
+    	
+    	CardcodeEN = new Scene(CardcodeEN1, 300, 250);
+    	
+    	BorderPane HomeEN1 = new BorderPane();
+        HomeEN1.setTop(addHBoxTop());
+        HomeEN1.setLeft(addVBoxHomeEN());
+        HomeEN1.setCenter(addStackPane());
+        HomeEN1.setBottom(addHBoxCardcodeEN());
+
+        HomeEN = new Scene(HomeEN1, 300, 250);
+        
+        BorderPane SnelpinEN1 = new BorderPane();
+    	SnelpinEN1.setTop(addHBoxTop());
+        SnelpinEN1.setLeft(addVBoxSnelpinENl());
+        SnelpinEN1.setCenter(addStackPane());
+        SnelpinEN1.setRight(addVBoxSnelpinENr());
+        SnelpinEN1.setBottom(addHBoxDown());
+        
+    	SnelpinEN = new Scene(SnelpinEN1, 300, 250);
+    	
+    	BorderPane SaldoEN1 = new BorderPane();
+    	SaldoEN1.setTop(addHBoxTop());
+        SaldoEN1.setLeft(addVBoxSaldoEN());
+        SaldoEN1.setCenter(addGridPaneSaldoEN());
+        SaldoEN1.setBottom(addHBoxDown());
+        
+    	SaldoEN = new Scene(SaldoEN1, 300, 250);
+    	
+    	BorderPane PinnenEN1 = new BorderPane();
+    	PinnenEN1.setTop(addHBoxTop());
+        PinnenEN1.setLeft(addVBoxPinnenENl());
+        PinnenEN1.setCenter(addStackPane());
+        PinnenEN1.setRight(addVBoxPinnenENr());
+        PinnenEN1.setBottom(addHBoxDown());
+        
+    	PinnenEN = new Scene(PinnenEN1, 300, 250);
+    	
+    	BorderPane AnderEN1 = new BorderPane();
+    	AnderEN1.setTop(addHBoxTop());
+        AnderEN1.setCenter(addGridPaneAnderEN());
+        AnderEN1.setBottom(addHBoxDown());
+        
+    	AnderEN = new Scene(AnderEN1, 300, 250);
+    	
+    	BorderPane BiljetEN1 = new BorderPane();
+    	BiljetEN1.setTop(addHBoxTop());
+        BiljetEN1.setLeft(addVBoxBiljetEN());
+        BiljetEN1.setCenter(addStackPane());
+        BiljetEN1.setBottom(addHBoxDown());
+        
+    	BiljetEN = new Scene(BiljetEN1, 300, 250);
+    	
+    	BorderPane BonEN1 = new BorderPane();
+    	BonEN1.setTop(addHBoxTop());
+        BonEN1.setCenter(addGridPaneBonEN());
+        BonEN1.setBottom(addHBoxDown());
+        
+    	BonEN = new Scene(BonEN1, 300, 250);
+    	
     	window.setFullScreen(true);
         window.setTitle("Geek Incorporated");
         window.setScene(Welkom);
@@ -132,9 +195,23 @@ public class Gui extends Application
     		new Button("EN")
     	};
     	
-    	options[0].setOnAction(e -> window.setScene(Cardcode));
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Cardcode);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	//options[1].setOnAction(e -> window.setScene(Cardcode));
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(CardcodeEN);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
     	for (int i=0; i<2; i++)
     	{
@@ -150,7 +227,7 @@ public class Gui extends Application
     	grid.setHgap(10);
     	grid.setVgap(10);
 
-    	Text scenetitle = new Text("Pincode invoeren");
+    	Text scenetitle = new Text("Pincode Invoeren");
     	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
@@ -158,16 +235,23 @@ public class Gui extends Application
     	Logo.setPreserveRatio(true);
     	grid.add(Logo, 0, 0);
     	
-    	Label pw = new Label("pincode:");
+    	Label pw = new Label("Pincode:");
     	grid.add(pw, 0, 1);
 
     	PasswordField pincode = new PasswordField();
     	grid.add(pincode, 1, 1);
 
-    	Button ok = new Button("Ok");
+    	Button ok = new Button("OK");
     	grid.add(ok, 2, 2);
     	
-    	ok.setOnAction(e -> window.setScene(Home));
+    	ok.setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Home);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
     	return grid;
     }
@@ -179,7 +263,14 @@ public class Gui extends Application
     	
     	Button Afbreken = new Button("Afbreken");
     	
-    	Afbreken.setOnAction(e -> window.setScene(Welkom));
+    	Afbreken.setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Welkom);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
     	hbox.getChildren().add(Afbreken);
     	
@@ -193,16 +284,37 @@ public class Gui extends Application
     	
     	Button options[] = new Button[]
     	{
-    		new Button("Geld opnemen"),
+    		new Button("Geld Opnemen"),
     		new Button("Saldo"),
-    		new Button("Snel pinnen")
+    		new Button("Snel Pinnen")
     	};
     	
-    	options[0].setOnAction(e -> window.setScene(Pinnen));
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Pinnen);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[1].setOnAction(e -> window.setScene(Saldo));
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Saldo);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[2].setOnAction(e -> window.setScene(Snelpin));
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Snelpin);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
     	for (int i=0; i<3; i++)
     	{
@@ -222,7 +334,14 @@ public class Gui extends Application
     		new Button("Afbreken")
     	};
     	
-    	options[0].setOnAction(e -> window.setScene(Welkom));
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Welkom);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
     	for (int i=0; i<1; i++)
     	{
@@ -245,13 +364,41 @@ public class Gui extends Application
     		new Button("€50")
     	};
     	
-    	options[0].setOnAction(e -> window.setScene(Bon));
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[1].setOnAction(e -> window.setScene(Bon));
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[2].setOnAction(e -> window.setScene(Bon));
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[3].setOnAction(e -> window.setScene(Bon));
+    	options[3].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
 
     	for (int i=0; i<4; i++)
     	{
@@ -274,13 +421,41 @@ public class Gui extends Application
     		new Button("€250")
     	};
     	
-    	options[0].setOnAction(e -> window.setScene(Bon));
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[1].setOnAction(e -> window.setScene(Bon));
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[2].setOnAction(e -> window.setScene(Bon));
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[3].setOnAction(e -> window.setScene(Bon));
+    	options[3].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
 
     	for (int i=0; i<4; i++)
     	{
@@ -297,13 +472,27 @@ public class Gui extends Application
     	
     	Button options[] = new Button[]
     	{
-    		new Button("Terug naar beginscherm"),
+    		new Button("Terug Naar Beginscherm"),
     		new Button("Afbreken")
     	};
     	
-    	options[0].setOnAction(e -> window.setScene(Home));
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Home);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[1].setOnAction(e -> window.setScene(Welkom));
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Welkom);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
     	for (int i=0; i<2; i++)
     	{
@@ -339,10 +528,17 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("Geld opnemen")
+    		new Button("Geld Opnemen")
     	};
     	
-    	options[0].setOnAction(e -> window.setScene(Pinnen));
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Pinnen);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
     	for (int i=0; i<1; i++)
     	{
@@ -366,15 +562,50 @@ public class Gui extends Application
     		new Button("€75")
     	};
     	
-    	options[0].setOnAction(e -> window.setScene(Bon));
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Biljet);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[1].setOnAction(e -> window.setScene(Bon));
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Biljet);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[2].setOnAction(e -> window.setScene(Bon));
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Biljet);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[3].setOnAction(e -> window.setScene(Bon));
+    	options[3].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Biljet);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[4].setOnAction(e -> window.setScene(Bon));
+    	options[4].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Biljet);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
     	for (int i=0; i<5; i++)
     	{
@@ -394,16 +625,44 @@ public class Gui extends Application
     		new Button("€90"),
     		new Button("€100"),
     		new Button("€250"),
-    		new Button("Ander bedrag")
+    		new Button("Ander Bedrag")
     	};
     	
-    	options[0].setOnAction(e -> window.setScene(Bon));
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Biljet);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[1].setOnAction(e -> window.setScene(Bon));
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Biljet);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[2].setOnAction(e -> window.setScene(Bon));
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Biljet);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[3].setOnAction(e -> window.setScene(Ander));
+    	options[3].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Ander);
+    				window.setFullScreen(true);
+    			}
+    		});
 
     	for (int i=0; i<4; i++)
     	{
@@ -419,7 +678,7 @@ public class Gui extends Application
     	grid.setHgap(10);
     	grid.setVgap(10);
 
-    	Text scenetitle = new Text("Bedrag invoeren");
+    	Text scenetitle = new Text("Bedrag Invoeren");
     	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
@@ -429,10 +688,17 @@ public class Gui extends Application
     	TextField userTextField = new TextField();
     	grid.add(userTextField, 1, 1);
     	
-    	Button ok = new Button("Ok");
+    	Button ok = new Button("OK");
     	grid.add(ok, 2, 2);
     	
-    	ok.setOnAction(e -> window.setScene(Biljet));
+    	ok.setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Biljet);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
     	return grid;
     }
@@ -450,13 +716,41 @@ public class Gui extends Application
     		new Button("€50")
     	};
     	
-    	options[0].setOnAction(e -> window.setScene(Bon));
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[1].setOnAction(e -> window.setScene(Bon));
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	options[2].setOnAction(e -> window.setScene(Bon));
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
     		
-    	options[3].setOnAction(e -> window.setScene(Bon));
+    	options[3].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Bon);
+    				window.setFullScreen(true);
+    			}
+    		});
 
     	for (int i=0; i<4; i++)
     	{
@@ -482,9 +776,572 @@ public class Gui extends Application
     	Button Nee = new Button("NEE");
     	grid.add(Nee, 2, 1);
 
-    	Ja.setOnAction(e -> window.setScene(Welkom));
+    	Ja.setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Welkom);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
-    	Nee.setOnAction(e -> window.setScene(Welkom));
+    	Nee.setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Welkom);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	return grid;
+    }
+    
+    public GridPane addGridPaneCardcodeEN()
+    {
+    	GridPane grid = new GridPane();
+    	grid.setHgap(10);
+    	grid.setVgap(10);
+
+    	Text scenetitle = new Text("Enter PIN");
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	grid.add(scenetitle, 0, 0, 2, 1);
+
+    	ImageView Logo = new ImageView("file:Geek Inc icon.png");
+    	Logo.setPreserveRatio(true);
+    	grid.add(Logo, 0, 0);
+    	
+    	Label pw = new Label("PIN:");
+    	grid.add(pw, 0, 1);
+
+    	PasswordField pincode = new PasswordField();
+    	grid.add(pincode, 1, 1);
+
+    	Button ok = new Button("OK");
+    	grid.add(ok, 2, 2);
+    	
+    	ok.setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(HomeEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	return grid;
+    }
+    
+    public HBox addHBoxCardcodeEN()
+    {
+    	HBox hbox = new HBox();
+    	hbox.setSpacing(8);
+    	
+    	Button Afbreken = new Button("Abort");
+    	
+    	Afbreken.setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Welkom);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	hbox.getChildren().add(Afbreken);
+    	
+    	return hbox;
+    }
+    
+    public VBox addVBoxHomeEN()
+    {
+    	VBox vbox = new VBox();
+    	vbox.setSpacing(8);
+    	
+    	Button options[] = new Button[]
+    	{
+    		new Button("Withdraw Money"),
+    		new Button("Balance"),
+    		new Button("Withdraw Money Fast")
+    	};
+    	
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(PinnenEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(SaldoEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(SnelpinEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	for (int i=0; i<3; i++)
+    	{
+    		vbox.getChildren().add(options[i]);
+    	}
+    	
+    	return vbox;
+    }
+    
+    public VBox addVBoxSnelpinENl()
+    {
+    	VBox vbox = new VBox();
+    	vbox.setSpacing(8);
+
+    	Button options[] = new Button[]
+    	{
+    		new Button("€10"),
+    		new Button("€20"),
+    		new Button("€30"),
+    		new Button("€50")
+    	};
+    	
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[3].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+
+    	for (int i=0; i<4; i++)
+    	{
+    		vbox.getChildren().add(options[i]);
+    	}
+
+    	return vbox;
+    }
+    
+    public VBox addVBoxSnelpinENr()
+    {
+    	VBox vbox = new VBox();
+    	vbox.setSpacing(8);
+
+    	Button options[] = new Button[]
+    	{
+    		new Button("€75"),
+    		new Button("€90"),
+    		new Button("€100"),
+    		new Button("€250")
+    	};
+    	
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[3].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+
+    	for (int i=0; i<4; i++)
+    	{
+    		vbox.getChildren().add(options[i]);
+    	}
+
+    	return vbox;
+    }
+    
+    public HBox addHBoxDown()
+    {
+    	HBox hbox = new HBox();
+    	hbox.setSpacing(8);
+    	
+    	Button options[] = new Button[]
+    	{
+    		new Button("Return To Home Screen"),
+    		new Button("Abort")
+    	};
+    	
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(HomeEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Welkom);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	for (int i=0; i<2; i++)
+    	{
+    		hbox.getChildren().add(options[i]);
+    	}
+    	
+    	return hbox;
+    }
+    
+    public GridPane addGridPaneSaldoEN()
+    {
+    	GridPane grid = new GridPane();
+    	grid.setHgap(10);
+    	grid.setVgap(10);
+
+    	Text scenetitle = new Text("Your Balance");
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	grid.add(scenetitle, 0, 0, 2, 1);
+
+    	Label userName = new Label("€");
+    	grid.add(userName, 0, 1);
+
+    	Label SaldoEN = new Label();
+    	grid.add(SaldoEN, 1, 1);
+    	
+    	return grid;
+    }
+    
+    public VBox addVBoxSaldoEN()
+    {
+    	VBox vbox = new VBox();
+    	vbox.setSpacing(8);
+
+    	Button options[] = new Button[]
+    	{
+    		new Button("Withdraw Money")
+    	};
+    	
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(PinnenEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	for (int i=0; i<1; i++)
+    	{
+    		vbox.getChildren().add(options[i]);
+    	}
+
+    	return vbox;
+    }
+    
+    public VBox addVBoxPinnenENl()
+    {
+    	VBox vbox = new VBox();
+    	vbox.setSpacing(8);
+
+    	Button options[] = new Button[]
+    	{
+    		new Button("€10"),
+    		new Button("€20"),
+    		new Button("€30"),
+    		new Button("€50"),
+    		new Button("€75")
+    	};
+    	
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BiljetEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BiljetEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BiljetEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[3].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BiljetEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[4].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BiljetEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	for (int i=0; i<5; i++)
+    	{
+    		vbox.getChildren().add(options[i]);
+    	}
+
+    	return vbox;
+    }
+    
+    public VBox addVBoxPinnenENr()
+    {
+    	VBox vbox = new VBox();
+    	vbox.setSpacing(8);
+
+    	Button options[] = new Button[]
+    	{
+    		new Button("€90"),
+    		new Button("€100"),
+    		new Button("€250"),
+    		new Button("Another Amount")
+    	};
+    	
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BiljetEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BiljetEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BiljetEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[3].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(AnderEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+
+    	for (int i=0; i<4; i++)
+    	{
+    		vbox.getChildren().add(options[i]);
+    	}
+
+    	return vbox;
+    }
+    
+    public GridPane addGridPaneAnderEN()
+    {
+    	GridPane grid = new GridPane();
+    	grid.setHgap(10);
+    	grid.setVgap(10);
+
+    	Text scenetitle = new Text("Enter Amount");
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	grid.add(scenetitle, 0, 0, 2, 1);
+
+    	Label userName = new Label("€");
+    	grid.add(userName, 0, 1);
+
+    	TextField userTextField = new TextField();
+    	grid.add(userTextField, 1, 1);
+    	
+    	Button ok = new Button("OK");
+    	grid.add(ok, 2, 2);
+    	
+    	ok.setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BiljetEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	return grid;
+    }
+    
+    public VBox addVBoxBiljetEN()
+    {
+    	VBox vbox = new VBox();
+    	vbox.setSpacing(8);
+
+    	Button options[] = new Button[]
+    	{
+    		new Button("€5"),
+    		new Button("€10"),
+    		new Button("€20"),
+    		new Button("€50")
+    	};
+    	
+    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+    		
+    	options[3].setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(BonEN);
+    				window.setFullScreen(true);
+    			}
+    		});
+
+    	for (int i=0; i<4; i++)
+    	{
+    		vbox.getChildren().add(options[i]);
+    	}
+
+    	return vbox;
+    }
+    
+    public GridPane addGridPaneBonEN()
+    {
+    	GridPane grid = new GridPane();
+    	grid.setHgap(10);
+    	grid.setVgap(10);
+
+    	Text scenetitle = new Text("Receipt?");
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	grid.add(scenetitle, 0, 0, 2, 1);
+
+    	Button Ja = new Button("YES");
+    	grid.add(Ja, 1, 1);
+
+    	Button Nee = new Button("NO");
+    	grid.add(Nee, 2, 1);
+
+    	Ja.setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Welkom);
+    				window.setFullScreen(true);
+    			}
+    		});
+    	
+    	Nee.setOnAction(new EventHandler<ActionEvent>()
+    		{
+    			public void handle(ActionEvent event)
+    			{
+    				window.setScene(Welkom);
+    				window.setFullScreen(true);
+    			}
+    		});
     	
     	return grid;
     }
