@@ -14,6 +14,10 @@ public class WithdrawResponse
     @JsonProperty
     private long newSaldo;
 
+    public WithdrawResponse()
+    {
+    }
+
     public String getResponse()
     {
         return response;
@@ -42,5 +46,15 @@ public class WithdrawResponse
     public void setNewSaldo(long newSaldo)
     {
         this.newSaldo = newSaldo;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "WithdrawResponse{" +
+                "response='" + response + '\'' +
+                ", transactionNumber=" + transactionNumber +
+                ", newSaldo=" + newSaldo +
+                '}';
     }
 }

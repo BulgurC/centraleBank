@@ -14,7 +14,6 @@ public class WithdrawRequest
 
     public WithdrawRequest()
     {
-
     }
     public String getIBAN()
     {

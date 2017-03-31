@@ -44,6 +44,20 @@ public class Server
         ResourceConfig config = new ResourceConfig(BankEndpoint.class);
         config.register(JacksonJaxbJsonProvider.class);
         URI uri = URI.create("http://0.0.0.0:" + port);
+
+         /*
+         * Code voor het initialiseren van je HTTP server met SSL connectie
+         * Ook de return statement aangepast
+         */
+//        SSLContextConfigurator sslConf = new SSLContextConfigurator();
+//        sslConf.setKeyStoreFile("./keystore_server"); // contains server keypair
+//        sslConf.setKeyStorePass("asdfgh");
+//        sslConf.setTrustStoreFile("./truststore_server"); // contains client certificate
+//        sslConf.setTrustStorePass("asdfgh");
+
+//        return GrizzlyHttpServerFactory.createHttpServer(uri, config, true, new SSLEngineConfigurator(sslConf));
+
+
         return GrizzlyHttpServerFactory.createHttpServer(uri,config, true);
     }
 

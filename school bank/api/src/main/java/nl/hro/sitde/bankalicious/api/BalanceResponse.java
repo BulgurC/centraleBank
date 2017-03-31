@@ -12,9 +12,23 @@ public class BalanceResponse
     @JsonProperty
     private String rekeningNummer;
 
-    public BalanceResponse(String rekeningNummer, long balance)
+    public long getBalance()
+    {
+        return balance;
+    }
+
+    public void setBalance(long balance)
+    {
+        this.balance = balance;
+    }
+
+    public String getRekeningNummer()
+    {
+        return rekeningNummer;
+    }
+
+    public void setRekeningNummer(String rekeningNummer)
     {
         this.rekeningNummer = rekeningNummer;
-        this.balance = balance;
     }
 }

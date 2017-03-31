@@ -31,7 +31,10 @@ public class BankEndpoint
     {
         Database db = Server.getDatabase();
         logger.trace("In the BankEndpoint::getSaldo()");
-        return new BalanceResponse(rekeningNummer, db.getBalance(rekeningNummer));
+        BalanceResponse response = new BalanceResponse();
+        response.setBalance(db.getBalance(rekeningNummer));
+        response.setRekeningNummer(rekeningNummer);
+        return response;
     }
 
     @POST
