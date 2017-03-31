@@ -4,6 +4,7 @@ import javafx.scene.layout.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
+import javafx.geometry.*;
 import javafx.scene.text.*;
 import javafx.scene.effect.*;
 import javafx.scene.image.*;
@@ -212,6 +213,11 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	
     	for (int i=0; i<2; i++)
     	{
@@ -228,7 +234,7 @@ public class Gui extends Application
     	grid.setVgap(10);
 
     	Text scenetitle = new Text("Pincode Invoeren");
-    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
     	ImageView Logo = new ImageView("file:Geek Inc icon.png");
@@ -236,18 +242,51 @@ public class Gui extends Application
     	grid.add(Logo, 0, 0);
     	
     	Label pw = new Label("Pincode:");
+    	pw.setFont(Font.font("Tahoma", 40));
     	grid.add(pw, 0, 1);
 
-    	PasswordField pincode = new PasswordField();
+    	PasswordField pincode = new PasswordField()
+    	{
+            //@Override
+            public void replaceText(int start, int end, String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    super.replaceText(start, end, text);   
+                }
+                
+                /*if (getText().length() = 4)
+                {
+                      end(); 
+                }*/
+            }
+ 
+            //@Override
+            public void replaceSelection(String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    super.replaceSelection(text);
+                }
+                
+                /*if (getText().length() = 4)
+                {
+                    end();
+                }*/
+            }
+        };
     	grid.add(pincode, 1, 1);
-
+    	
     	Button ok = new Button("OK");
+    	ok.setStyle("-fx-font-size: 20pt;");
+    	ok.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	grid.add(ok, 2, 2);
     	
     	ok.setOnAction(new EventHandler<ActionEvent>()
     		{
     			public void handle(ActionEvent event)
     			{
+    				pincode.clear();
     				window.setScene(Home);
     				window.setFullScreen(true);
     			}
@@ -265,13 +304,17 @@ public class Gui extends Application
     	
     	Afbreken.setOnAction(new EventHandler<ActionEvent>()
     		{
+    			//@Override
     			public void handle(ActionEvent event)
     			{
+    				//pincode.clear();
     				window.setScene(Welkom);
     				window.setFullScreen(true);
     			}
     		});
     	
+    	Afbreken.setStyle("-fx-font-size: 20pt;");
+    	Afbreken.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	hbox.getChildren().add(Afbreken);
     	
     	return hbox;
@@ -316,39 +359,20 @@ public class Gui extends Application
     			}
     		});
     	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	
     	for (int i=0; i<3; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
     	
     	return vbox;
-    }
-    
-    public HBox addHBoxHome()
-    {
-    	HBox hbox = new HBox();
-    	hbox.setSpacing(8);
-    	
-    	Button options[] = new Button[]
-    	{
-    		new Button("Afbreken")
-    	};
-    	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(Welkom);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	for (int i=0; i<1; i++)
-    	{
-    		hbox.getChildren().add(options[i]);
-    	}
-    	
-    	return hbox;
     }
     
     public VBox addVBoxSnelpinl()
@@ -399,6 +423,16 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	options[3].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     	for (int i=0; i<4; i++)
     	{
@@ -456,6 +490,16 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	options[3].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     	for (int i=0; i<4; i++)
     	{
@@ -480,6 +524,8 @@ public class Gui extends Application
     		{
     			public void handle(ActionEvent event)
     			{
+    				//geld.clear();
+    				//userTextField.clear();
     				window.setScene(Home);
     				window.setFullScreen(true);
     			}
@@ -489,10 +535,18 @@ public class Gui extends Application
     		{
     			public void handle(ActionEvent event)
     			{
+    				//geld.clear();
+    				//userTextField.clear();
     				window.setScene(Welkom);
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	
     	for (int i=0; i<2; i++)
     	{
@@ -509,14 +563,36 @@ public class Gui extends Application
     	grid.setVgap(10);
 
     	Text scenetitle = new Text("Uw Saldo");
-    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
     	Label userName = new Label("€");
+    	userName.setFont(Font.font("Tahoma", 40));
     	grid.add(userName, 0, 1);
 
-    	Label Saldo = new Label();
-    	grid.add(Saldo, 1, 1);
+    	Label geld = new Label()
+    	{
+            //@Override
+            public void replaceText(int start, int end, String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    replaceText(start, end, text);   
+                }
+            }
+ 
+            //@Override
+            public void replaceSelection(String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    replaceSelection(text);
+                }  
+            }
+        };
+        
+        geld.setFont(Font.font("Tahoma", 40));
+    	grid.add(geld, 1, 1);
     	
     	return grid;
     }
@@ -535,10 +611,14 @@ public class Gui extends Application
     		{
     			public void handle(ActionEvent event)
     			{
+    				//geld.clear();
     				window.setScene(Pinnen);
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	
     	for (int i=0; i<1; i++)
     	{
@@ -607,6 +687,18 @@ public class Gui extends Application
     			}
     		});
     	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	options[3].setStyle("-fx-font-size: 20pt;");
+    	options[4].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[4].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	
     	for (int i=0; i<5; i++)
     	{
     		vbox.getChildren().add(options[i]);
@@ -663,6 +755,16 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	options[3].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     	for (int i=0; i<4; i++)
     	{
@@ -679,22 +781,47 @@ public class Gui extends Application
     	grid.setVgap(10);
 
     	Text scenetitle = new Text("Bedrag Invoeren");
-    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
     	Label userName = new Label("€");
+    	userName.setFont(Font.font("Tahoma", 40));
     	grid.add(userName, 0, 1);
 
-    	TextField userTextField = new TextField();
+    	TextField userTextField = new TextField()
+    	{
+            //@Override
+            public void replaceText(int start, int end, String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    super.replaceText(start, end, text);   
+                }
+            }
+ 
+            //@Override
+            public void replaceSelection(String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    super.replaceSelection(text);
+                }  
+            }
+        };
+        
+        userTextField.setFont(Font.font("Tahoma", 40));
     	grid.add(userTextField, 1, 1);
     	
     	Button ok = new Button("OK");
+    	ok.setStyle("-fx-font-size: 20pt;");
+    	ok.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	grid.add(ok, 2, 2);
     	
     	ok.setOnAction(new EventHandler<ActionEvent>()
     		{
     			public void handle(ActionEvent event)
     			{
+    				userTextField.clear();
     				window.setScene(Biljet);
     				window.setFullScreen(true);
     			}
@@ -751,6 +878,16 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	options[3].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     	for (int i=0; i<4; i++)
     	{
@@ -767,7 +904,7 @@ public class Gui extends Application
     	grid.setVgap(10);
 
     	Text scenetitle = new Text("Bon?");
-    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
     	Button Ja = new Button("JA");
@@ -794,6 +931,12 @@ public class Gui extends Application
     			}
     		});
     	
+    	Ja.setStyle("-fx-font-size: 20pt;");
+    	Nee.setStyle("-fx-font-size: 20pt;");
+    	
+    	Ja.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	Nee.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	
     	return grid;
     }
     
@@ -804,7 +947,7 @@ public class Gui extends Application
     	grid.setVgap(10);
 
     	Text scenetitle = new Text("Enter PIN");
-    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
     	ImageView Logo = new ImageView("file:Geek Inc icon.png");
@@ -812,18 +955,41 @@ public class Gui extends Application
     	grid.add(Logo, 0, 0);
     	
     	Label pw = new Label("PIN:");
+    	pw.setFont(Font.font("Tahoma", 40));
     	grid.add(pw, 0, 1);
 
-    	PasswordField pincode = new PasswordField();
+    	PasswordField pincode = new PasswordField()
+    	{
+            //@Override
+            public void replaceText(int start, int end, String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    super.replaceText(start, end, text);   
+                }
+            }
+ 
+            //@Override
+            public void replaceSelection(String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    super.replaceSelection(text);
+                }  
+            }
+        };
     	grid.add(pincode, 1, 1);
-
+    	
     	Button ok = new Button("OK");
+    	ok.setStyle("-fx-font-size: 20pt;");
+    	ok.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	grid.add(ok, 2, 2);
     	
     	ok.setOnAction(new EventHandler<ActionEvent>()
     		{
     			public void handle(ActionEvent event)
     			{
+    				pincode.clear();
     				window.setScene(HomeEN);
     				window.setFullScreen(true);
     			}
@@ -843,10 +1009,14 @@ public class Gui extends Application
     		{
     			public void handle(ActionEvent event)
     			{
+    				//pincode.clear();
     				window.setScene(Welkom);
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	Afbreken.setStyle("-fx-font-size: 20pt;");
+    	Afbreken.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	
     	hbox.getChildren().add(Afbreken);
     	
@@ -891,6 +1061,14 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	
     	for (int i=0; i<3; i++)
     	{
@@ -948,6 +1126,16 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	options[3].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     	for (int i=0; i<4; i++)
     	{
@@ -1005,6 +1193,16 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	options[3].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     	for (int i=0; i<4; i++)
     	{
@@ -1029,6 +1227,8 @@ public class Gui extends Application
     		{
     			public void handle(ActionEvent event)
     			{
+    				//geld.clear();
+    				//userTextField.clear();
     				window.setScene(HomeEN);
     				window.setFullScreen(true);
     			}
@@ -1038,10 +1238,18 @@ public class Gui extends Application
     		{
     			public void handle(ActionEvent event)
     			{
+    				//geld.clear();
+    				//userTextField.clear();
     				window.setScene(Welkom);
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	
     	for (int i=0; i<2; i++)
     	{
@@ -1058,14 +1266,36 @@ public class Gui extends Application
     	grid.setVgap(10);
 
     	Text scenetitle = new Text("Your Balance");
-    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
     	Label userName = new Label("€");
+    	userName.setFont(Font.font("Tahoma", 40));
     	grid.add(userName, 0, 1);
 
-    	Label SaldoEN = new Label();
-    	grid.add(SaldoEN, 1, 1);
+    	Label geld = new Label()
+    	{
+            //@Override
+            public void replaceText(int start, int end, String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    replaceText(start, end, text);   
+                }
+            }
+ 
+            //@Override
+            public void replaceSelection(String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    replaceSelection(text);
+                }  
+            }
+        };
+        
+        geld.setFont(Font.font("Tahoma", 40));
+    	grid.add(geld, 1, 1);
     	
     	return grid;
     }
@@ -1084,10 +1314,14 @@ public class Gui extends Application
     		{
     			public void handle(ActionEvent event)
     			{
+    				//geld.clear();
     				window.setScene(PinnenEN);
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	
     	for (int i=0; i<1; i++)
     	{
@@ -1156,6 +1390,18 @@ public class Gui extends Application
     			}
     		});
     	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	options[3].setStyle("-fx-font-size: 20pt;");
+    	options[4].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[4].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	
     	for (int i=0; i<5; i++)
     	{
     		vbox.getChildren().add(options[i]);
@@ -1212,6 +1458,16 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	options[3].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     	for (int i=0; i<4; i++)
     	{
@@ -1228,22 +1484,45 @@ public class Gui extends Application
     	grid.setVgap(10);
 
     	Text scenetitle = new Text("Enter Amount");
-    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
     	Label userName = new Label("€");
+    	userName.setFont(Font.font("Tahoma", 40));
     	grid.add(userName, 0, 1);
 
-    	TextField userTextField = new TextField();
+    	TextField userTextField = new TextField()
+    	{
+            //@Override
+            public void replaceText(int start, int end, String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    super.replaceText(start, end, text);   
+                }
+            }
+ 
+            //@Override
+            public void replaceSelection(String text)
+            {
+                if (!text.matches("[a-z, A-Z, #, *]"))
+                {
+                    super.replaceSelection(text);
+                }  
+            }
+        };
     	grid.add(userTextField, 1, 1);
     	
     	Button ok = new Button("OK");
+    	ok.setStyle("-fx-font-size: 20pt;");
+    	ok.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	grid.add(ok, 2, 2);
     	
     	ok.setOnAction(new EventHandler<ActionEvent>()
     		{
     			public void handle(ActionEvent event)
     			{
+    				userTextField.clear();
     				window.setScene(BiljetEN);
     				window.setFullScreen(true);
     			}
@@ -1300,6 +1579,16 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	options[0].setStyle("-fx-font-size: 20pt;");
+    	options[1].setStyle("-fx-font-size: 20pt;");
+    	options[2].setStyle("-fx-font-size: 20pt;");
+    	options[3].setStyle("-fx-font-size: 20pt;");
+    	
+    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     	for (int i=0; i<4; i++)
     	{
@@ -1316,7 +1605,7 @@ public class Gui extends Application
     	grid.setVgap(10);
 
     	Text scenetitle = new Text("Receipt?");
-    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
     	Button Ja = new Button("YES");
@@ -1342,6 +1631,11 @@ public class Gui extends Application
     				window.setFullScreen(true);
     			}
     		});
+    	
+    	Nee.setStyle("-fx-font-size: 20pt;");
+    	Ja.setStyle("-fx-font-size: 20pt;");
+    	Nee.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    	Ja.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	
     	return grid;
     }
