@@ -4,15 +4,25 @@ import javafx.scene.layout.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
+import javafx.scene.input.*;
 import javafx.geometry.*;
 import javafx.scene.text.*;
 import javafx.scene.effect.*;
 import javafx.scene.image.*;
+import javafx.beans.value.*;
+import javafx.beans.*;
+import javafx.beans.property.adapter.*;
+import javafx.beans.property.*;
+import javafx.beans.binding.*;
 
 public class Gui extends Application
 {
-	Stage window;
+	private Stage primaryStage;
 	Scene Welkom, Cardcode, Home, Snelpin, Saldo, Pinnen, Ander, Biljet, Bon, CardcodeEN, HomeEN, SnelpinEN, SaldoEN, PinnenEN, AnderEN, BiljetEN, BonEN;
+	
+	//EventHandler<KeyEvent>(KeyCode.NUMBER_SIGN = KeyCode.TAB);//KeyCode.TAB = KeyCode.NUMBER_SIGN;
+	//KeyCode.BACK_SPACE == KeyCode.Asterisk;
+	//private KeyCode.NUMBER_SIGN equals(KeyCode.TAB);
 	
 	public static void main(String[] args)
 	{
@@ -22,21 +32,27 @@ public class Gui extends Application
 	@Override
 	public void start(Stage primaryStage)
 	{
-		window = primaryStage;
+		this.primaryStage = primaryStage;
+		primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+
+        int width = (int) Screen.getPrimary().getBounds().getWidth();
+        int height = (int) Screen.getPrimary().getBounds().getHeight();
+
 		
 		BorderPane Welkom1 = new BorderPane();
         Welkom1.setTop(addHBoxTop());
         Welkom1.setCenter(addStackPane());
         Welkom1.setBottom(addHBoxWelkom());
         
-        Welkom = new Scene(Welkom1, 300, 250);
+        Welkom = new Scene(Welkom1, width, height);
         
         BorderPane Cardcode1 = new BorderPane();
     	Cardcode1.setTop(addHBoxTop());
     	Cardcode1.setCenter(addGridPaneCardcode());
     	Cardcode1.setBottom(addHBoxCardcode());
     	
-    	Cardcode = new Scene(Cardcode1, 300, 250);
+    	Cardcode = new Scene(Cardcode1, width, height);
     	
     	BorderPane Home1 = new BorderPane();
         Home1.setTop(addHBoxTop());
@@ -44,7 +60,7 @@ public class Gui extends Application
         Home1.setCenter(addStackPane());
         Home1.setBottom(addHBoxCardcode());
 
-        Home = new Scene(Home1, 300, 250);
+        Home = new Scene(Home1, width, height);
         
         BorderPane Snelpin1 = new BorderPane();
     	Snelpin1.setTop(addHBoxTop());
@@ -53,7 +69,7 @@ public class Gui extends Application
         Snelpin1.setRight(addVBoxSnelpinr());
         Snelpin1.setBottom(addHBoxBottom());
         
-    	Snelpin = new Scene(Snelpin1, 300, 250);
+    	Snelpin = new Scene(Snelpin1, width, height);
     	
     	BorderPane Saldo1 = new BorderPane();
     	Saldo1.setTop(addHBoxTop());
@@ -61,7 +77,7 @@ public class Gui extends Application
         Saldo1.setCenter(addGridPaneSaldo());
         Saldo1.setBottom(addHBoxBottom());
         
-    	Saldo = new Scene(Saldo1, 300, 250);
+    	Saldo = new Scene(Saldo1, width, height);
     	
     	BorderPane Pinnen1 = new BorderPane();
     	Pinnen1.setTop(addHBoxTop());
@@ -70,14 +86,14 @@ public class Gui extends Application
         Pinnen1.setRight(addVBoxPinnenr());
         Pinnen1.setBottom(addHBoxBottom());
         
-    	Pinnen = new Scene(Pinnen1, 300, 250);
+    	Pinnen = new Scene(Pinnen1, width, height);
     	
     	BorderPane Ander1 = new BorderPane();
     	Ander1.setTop(addHBoxTop());
         Ander1.setCenter(addGridPaneAnder());
         Ander1.setBottom(addHBoxBottom());
         
-    	Ander = new Scene(Ander1, 300, 250);
+    	Ander = new Scene(Ander1, width, height);
     	
     	BorderPane Biljet1 = new BorderPane();
     	Biljet1.setTop(addHBoxTop());
@@ -85,21 +101,21 @@ public class Gui extends Application
         Biljet1.setCenter(addStackPane());
         Biljet1.setBottom(addHBoxBottom());
         
-    	Biljet = new Scene(Biljet1, 300, 250);
+    	Biljet = new Scene(Biljet1, width, height);
     	
     	BorderPane Bon1 = new BorderPane();
     	Bon1.setTop(addHBoxTop());
         Bon1.setCenter(addGridPaneBon());
         Bon1.setBottom(addHBoxBottom());
         
-    	Bon = new Scene(Bon1, 300, 250);
+    	Bon = new Scene(Bon1, width, height);
     	
     	BorderPane CardcodeEN1 = new BorderPane();
     	CardcodeEN1.setTop(addHBoxTop());
     	CardcodeEN1.setCenter(addGridPaneCardcodeEN());
     	CardcodeEN1.setBottom(addHBoxCardcodeEN());
     	
-    	CardcodeEN = new Scene(CardcodeEN1, 300, 250);
+    	CardcodeEN = new Scene(CardcodeEN1, width, height);
     	
     	BorderPane HomeEN1 = new BorderPane();
         HomeEN1.setTop(addHBoxTop());
@@ -107,7 +123,7 @@ public class Gui extends Application
         HomeEN1.setCenter(addStackPane());
         HomeEN1.setBottom(addHBoxCardcodeEN());
 
-        HomeEN = new Scene(HomeEN1, 300, 250);
+        HomeEN = new Scene(HomeEN1, width, height);
         
         BorderPane SnelpinEN1 = new BorderPane();
     	SnelpinEN1.setTop(addHBoxTop());
@@ -116,7 +132,7 @@ public class Gui extends Application
         SnelpinEN1.setRight(addVBoxSnelpinENr());
         SnelpinEN1.setBottom(addHBoxDown());
         
-    	SnelpinEN = new Scene(SnelpinEN1, 300, 250);
+    	SnelpinEN = new Scene(SnelpinEN1, width, height);
     	
     	BorderPane SaldoEN1 = new BorderPane();
     	SaldoEN1.setTop(addHBoxTop());
@@ -124,7 +140,7 @@ public class Gui extends Application
         SaldoEN1.setCenter(addGridPaneSaldoEN());
         SaldoEN1.setBottom(addHBoxDown());
         
-    	SaldoEN = new Scene(SaldoEN1, 300, 250);
+    	SaldoEN = new Scene(SaldoEN1, width, height);
     	
     	BorderPane PinnenEN1 = new BorderPane();
     	PinnenEN1.setTop(addHBoxTop());
@@ -133,14 +149,14 @@ public class Gui extends Application
         PinnenEN1.setRight(addVBoxPinnenENr());
         PinnenEN1.setBottom(addHBoxDown());
         
-    	PinnenEN = new Scene(PinnenEN1, 300, 250);
+    	PinnenEN = new Scene(PinnenEN1, width, height);
     	
     	BorderPane AnderEN1 = new BorderPane();
     	AnderEN1.setTop(addHBoxTop());
         AnderEN1.setCenter(addGridPaneAnderEN());
         AnderEN1.setBottom(addHBoxDown());
         
-    	AnderEN = new Scene(AnderEN1, 300, 250);
+    	AnderEN = new Scene(AnderEN1, width, height);
     	
     	BorderPane BiljetEN1 = new BorderPane();
     	BiljetEN1.setTop(addHBoxTop());
@@ -148,19 +164,19 @@ public class Gui extends Application
         BiljetEN1.setCenter(addStackPane());
         BiljetEN1.setBottom(addHBoxDown());
         
-    	BiljetEN = new Scene(BiljetEN1, 300, 250);
+    	BiljetEN = new Scene(BiljetEN1, width, height);
     	
     	BorderPane BonEN1 = new BorderPane();
     	BonEN1.setTop(addHBoxTop());
         BonEN1.setCenter(addGridPaneBonEN());
         BonEN1.setBottom(addHBoxDown());
         
-    	BonEN = new Scene(BonEN1, 300, 250);
+    	BonEN = new Scene(BonEN1);
     	
-    	window.setFullScreen(true);
-        window.setTitle("Geek Incorporated");
-        window.setScene(Welkom);
-        window.show();
+    	primaryStage.setFullScreen(true);
+        primaryStage.setTitle("Geek Incorporated");
+        primaryStage.setScene(Welkom);
+        primaryStage.show();
 	}
 	
 	public HBox addHBoxTop()
@@ -192,25 +208,32 @@ public class Gui extends Application
     	
     	Button options[] = new Button[]
     	{
-    		new Button("NL"),
-    		new Button("EN")
+    		new Button("NL  (A)"),
+    		new Button("EN  (B)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Cardcode);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.A)
+    				{
+    					primaryStage.setScene(Cardcode);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(CardcodeEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.B)
+    				{
+    					primaryStage.setScene(CardcodeEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	options[0].setStyle("-fx-font-size: 20pt;");
@@ -236,7 +259,7 @@ public class Gui extends Application
     	Text scenetitle = new Text("Pincode Invoeren");
     	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
-
+    	
     	ImageView Logo = new ImageView("file:Geek Inc icon.png");
     	Logo.setPreserveRatio(true);
     	grid.add(Logo, 0, 0);
@@ -244,7 +267,7 @@ public class Gui extends Application
     	Label pw = new Label("Pincode:");
     	pw.setFont(Font.font("Tahoma", 40));
     	grid.add(pw, 0, 1);
-
+    	
     	PasswordField pincode = new PasswordField()
     	{
             //@Override
@@ -277,18 +300,34 @@ public class Gui extends Application
         };
     	grid.add(pincode, 1, 1);
     	
-    	Button ok = new Button("OK");
+    	Button ok = new Button("OK  (A)");
     	ok.setStyle("-fx-font-size: 20pt;");
     	ok.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	grid.add(ok, 2, 2);
     	
-    	ok.setOnAction(new EventHandler<ActionEvent>()
+    	ok.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				pincode.clear();
-    				window.setScene(Home);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.A)
+    				{
+    					for(int i=0;i<3;i++)
+    					{
+    						if ("1234".equals(pincode.getText()))
+    							{
+    								pincode.clear();
+    								primaryStage.setScene(Home);
+    								primaryStage.setFullScreen(true);
+    							}
+    						
+    						else if (!"1234".equals(pincode.getText()))
+    							{
+    								Label l = new Label("Verkeerde pincode");
+    								l.setFont(Font.font("Tahoma", 40));
+    								grid.add(l, 3, 1);
+    							}
+    					}
+    				}
     			}
     		});
     	
@@ -300,16 +339,18 @@ public class Gui extends Application
     	HBox hbox = new HBox();
     	hbox.setSpacing(8);
     	
-    	Button Afbreken = new Button("Afbreken");
+    	Button Afbreken = new Button("Afbreken  (D)");
     	
-    	Afbreken.setOnAction(new EventHandler<ActionEvent>()
+    	Afbreken.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			//@Override
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				//pincode.clear();
-    				window.setScene(Welkom);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.D)
+    				{
+    					//pincode.clear();
+    					primaryStage.setScene(Welkom);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -327,35 +368,44 @@ public class Gui extends Application
     	
     	Button options[] = new Button[]
     	{
-    		new Button("Geld Opnemen"),
-    		new Button("Saldo"),
-    		new Button("Snel Pinnen")
+    		new Button("Geld Opnemen  (1)"),
+    		new Button("Saldo  (2)"),
+    		new Button("Snel Pinnen  (3)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Pinnen);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD1)
+    				{
+    					primaryStage.setScene(Pinnen);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Saldo);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD2)
+    				{
+    					primaryStage.setScene(Saldo);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Snelpin);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD3)
+    				{
+    					primaryStage.setScene(Snelpin);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -382,59 +432,56 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€10"),
-    		new Button("€20"),
-    		new Button("€30"),
-    		new Button("€50")
+    		new Button("€10  (0)"),
+    		new Button("€20  (1)"),
+    		new Button("€50  (2)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD0)
+    				{
+    					primaryStage.setScene(Bon);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD1)
+    				{
+    					primaryStage.setScene(Bon);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[3].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD2)
+    				{
+    					primaryStage.setScene(Bon);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
     	options[0].setStyle("-fx-font-size: 20pt;");
     	options[1].setStyle("-fx-font-size: 20pt;");
     	options[2].setStyle("-fx-font-size: 20pt;");
-    	options[3].setStyle("-fx-font-size: 20pt;");
     	
     	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-    	for (int i=0; i<4; i++)
+    	for (int i=0; i<3; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
@@ -449,59 +496,41 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€75"),
-    		new Button("€90"),
-    		new Button("€100"),
-    		new Button("€250")
+    		new Button("€100  (3)"),
+    		new Button("€250  (4)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD3)
+    				{
+    					primaryStage.setScene(Bon);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[3].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD4)
+    				{
+    					primaryStage.setScene(Bon);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
     	options[0].setStyle("-fx-font-size: 20pt;");
     	options[1].setStyle("-fx-font-size: 20pt;");
-    	options[2].setStyle("-fx-font-size: 20pt;");
-    	options[3].setStyle("-fx-font-size: 20pt;");
     	
     	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-    	for (int i=0; i<4; i++)
+    	
+    	for (int i=0; i<2; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
@@ -516,29 +545,35 @@ public class Gui extends Application
     	
     	Button options[] = new Button[]
     	{
-    		new Button("Terug Naar Beginscherm"),
-    		new Button("Afbreken")
+    		new Button("Terug Naar Beginscherm  (C)"),
+    		new Button("Afbreken  (D)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				//geld.clear();
-    				//userTextField.clear();
-    				window.setScene(Home);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.C)
+    				{
+    					//geld.clear();
+    					//userTextField.clear();
+    					primaryStage.setScene(Home);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				//geld.clear();
-    				//userTextField.clear();
-    				window.setScene(Welkom);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.D)
+    				{
+    					//geld.clear();
+    					//userTextField.clear();
+    					primaryStage.setScene(Welkom);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -604,16 +639,19 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("Geld Opnemen")
+    		new Button("Geld Opnemen  (A)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				//geld.clear();
-    				window.setScene(Pinnen);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.A)
+    				{
+    					//geld.clear();
+    					primaryStage.setScene(Pinnen);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -635,71 +673,56 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€10"),
-    		new Button("€20"),
-    		new Button("€30"),
-    		new Button("€50"),
-    		new Button("€75")
+    		new Button("€10  (0)"),
+    		new Button("€20  (1)"),
+    		new Button("€50  (2)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Biljet);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD0)
+    				{
+    					primaryStage.setScene(Biljet);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Biljet);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD1)
+    				{
+    					primaryStage.setScene(Biljet);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Biljet);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[3].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(Biljet);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[4].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(Biljet);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD2)
+    				{
+    					primaryStage.setScene(Biljet);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
     	options[0].setStyle("-fx-font-size: 20pt;");
     	options[1].setStyle("-fx-font-size: 20pt;");
     	options[2].setStyle("-fx-font-size: 20pt;");
-    	options[3].setStyle("-fx-font-size: 20pt;");
-    	options[4].setStyle("-fx-font-size: 20pt;");
     	
     	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[4].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	
-    	for (int i=0; i<5; i++)
+    	for (int i=0; i<3; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
@@ -714,59 +737,56 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€90"),
-    		new Button("€100"),
-    		new Button("€250"),
-    		new Button("Ander Bedrag")
+    		new Button("€100  (3)"),
+    		new Button("€250  (4)"),
+    		new Button("Ander Bedrag  (5)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Biljet);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD3)
+    				{
+    					primaryStage.setScene(Biljet);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Biljet);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD4)
+    				{
+    					primaryStage.setScene(Biljet);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Biljet);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[3].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(Ander);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD5)
+    				{
+    					primaryStage.setScene(Biljet);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
     	options[0].setStyle("-fx-font-size: 20pt;");
     	options[1].setStyle("-fx-font-size: 20pt;");
     	options[2].setStyle("-fx-font-size: 20pt;");
-    	options[3].setStyle("-fx-font-size: 20pt;");
     	
     	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-    	for (int i=0; i<4; i++)
+    	
+    	for (int i=0; i<3; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
@@ -812,18 +832,21 @@ public class Gui extends Application
         userTextField.setFont(Font.font("Tahoma", 40));
     	grid.add(userTextField, 1, 1);
     	
-    	Button ok = new Button("OK");
+    	Button ok = new Button("OK  (A)");
     	ok.setStyle("-fx-font-size: 20pt;");
     	ok.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	grid.add(ok, 2, 2);
     	
-    	ok.setOnAction(new EventHandler<ActionEvent>()
+    	ok.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				userTextField.clear();
-    				window.setScene(Biljet);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.A)
+    				{
+    					userTextField.clear();
+    					primaryStage.setScene(Biljet);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -837,59 +860,56 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€5"),
-    		new Button("€10"),
-    		new Button("€20"),
-    		new Button("€50")
+    		new Button("€10  (0)"),
+    		new Button("€20  (1)"),
+    		new Button("€50  (2)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD0)
+    				{
+    					primaryStage.setScene(Bon);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD1)
+    				{
+    					primaryStage.setScene(Bon);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
-    			}
-    		});
-    		
-    	options[3].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(Bon);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD2)
+    				{
+    					primaryStage.setScene(Bon);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
     	options[0].setStyle("-fx-font-size: 20pt;");
     	options[1].setStyle("-fx-font-size: 20pt;");
     	options[2].setStyle("-fx-font-size: 20pt;");
-    	options[3].setStyle("-fx-font-size: 20pt;");
     	
     	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-    	for (int i=0; i<4; i++)
+    	
+    	for (int i=0; i<3; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
@@ -907,27 +927,33 @@ public class Gui extends Application
     	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
-    	Button Ja = new Button("JA");
+    	Button Ja = new Button("JA  (A)");
     	grid.add(Ja, 1, 1);
 
-    	Button Nee = new Button("NEE");
+    	Button Nee = new Button("NEE  (B)");
     	grid.add(Nee, 2, 1);
 
-    	Ja.setOnAction(new EventHandler<ActionEvent>()
+    	Ja.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Welkom);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.A)
+    				{
+    					primaryStage.setScene(Welkom);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	Nee.setOnAction(new EventHandler<ActionEvent>()
+    	Nee.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Welkom);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.B)
+    				{
+    					primaryStage.setScene(Welkom);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -980,18 +1006,21 @@ public class Gui extends Application
         };
     	grid.add(pincode, 1, 1);
     	
-    	Button ok = new Button("OK");
+    	Button ok = new Button("OK  (A)");
     	ok.setStyle("-fx-font-size: 20pt;");
     	ok.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	grid.add(ok, 2, 2);
     	
-    	ok.setOnAction(new EventHandler<ActionEvent>()
+    	ok.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				pincode.clear();
-    				window.setScene(HomeEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.A)
+    				{
+    					pincode.clear();
+    					primaryStage.setScene(HomeEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -1003,15 +1032,18 @@ public class Gui extends Application
     	HBox hbox = new HBox();
     	hbox.setSpacing(8);
     	
-    	Button Afbreken = new Button("Abort");
+    	Button Afbreken = new Button("Abort  (D)");
     	
-    	Afbreken.setOnAction(new EventHandler<ActionEvent>()
+    	Afbreken.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				//pincode.clear();
-    				window.setScene(Welkom);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.D)
+    				{
+    					//pincode.clear();
+    					primaryStage.setScene(Welkom);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -1030,35 +1062,44 @@ public class Gui extends Application
     	
     	Button options[] = new Button[]
     	{
-    		new Button("Withdraw Money"),
-    		new Button("Balance"),
-    		new Button("Withdraw Money Fast")
+    		new Button("Withdraw Money  (1)"),
+    		new Button("Balance  (2)"),
+    		new Button("Withdraw Money Fast  (3)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(PinnenEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD1)
+    				{
+    					primaryStage.setScene(PinnenEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(SaldoEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD2)
+    				{
+    					primaryStage.setScene(SaldoEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(SnelpinEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD3)
+    				{
+    					primaryStage.setScene(SnelpinEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -1085,59 +1126,56 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€10"),
-    		new Button("€20"),
-    		new Button("€30"),
-    		new Button("€50")
+    		new Button("€10  (0)"),
+    		new Button("€20  (1)"),
+    		new Button("€50  (2)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD0)
+    				{
+    					primaryStage.setScene(BonEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD1)
+    				{
+    					primaryStage.setScene(BonEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[3].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD2)
+    				{
+    					primaryStage.setScene(BonEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
     	options[0].setStyle("-fx-font-size: 20pt;");
     	options[1].setStyle("-fx-font-size: 20pt;");
     	options[2].setStyle("-fx-font-size: 20pt;");
-    	options[3].setStyle("-fx-font-size: 20pt;");
     	
     	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-    	for (int i=0; i<4; i++)
+    	
+    	for (int i=0; i<3; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
@@ -1152,59 +1190,41 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€75"),
-    		new Button("€90"),
-    		new Button("€100"),
-    		new Button("€250")
+    		new Button("€100  (3)"),
+    		new Button("€250  (4)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD3)
+    				{
+    					primaryStage.setScene(BonEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[3].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD4)
+    				{
+    					primaryStage.setScene(BonEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
     	options[0].setStyle("-fx-font-size: 20pt;");
     	options[1].setStyle("-fx-font-size: 20pt;");
-    	options[2].setStyle("-fx-font-size: 20pt;");
-    	options[3].setStyle("-fx-font-size: 20pt;");
     	
     	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-    	for (int i=0; i<4; i++)
+    	
+    	for (int i=0; i<2; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
@@ -1219,29 +1239,35 @@ public class Gui extends Application
     	
     	Button options[] = new Button[]
     	{
-    		new Button("Return To Home Screen"),
-    		new Button("Abort")
+    		new Button("Return To Home Screen  (C)"),
+    		new Button("Abort  (D)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				//geld.clear();
-    				//userTextField.clear();
-    				window.setScene(HomeEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.C)
+    				{
+    					//geld.clear();
+    					//userTextField.clear();
+    					primaryStage.setScene(HomeEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				//geld.clear();
-    				//userTextField.clear();
-    				window.setScene(Welkom);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.D)
+    				{
+    					//geld.clear();
+    					//userTextField.clear();
+    					primaryStage.setScene(Welkom);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -1307,16 +1333,19 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("Withdraw Money")
+    		new Button("Withdraw Money  (A)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				//geld.clear();
-    				window.setScene(PinnenEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.A)
+    				{
+    					//geld.clear();
+    					primaryStage.setScene(PinnenEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -1338,71 +1367,56 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€10"),
-    		new Button("€20"),
-    		new Button("€30"),
-    		new Button("€50"),
-    		new Button("€75")
+    		new Button("€10(0)"),
+    		new Button("€20(1)"),
+    		new Button("€50(2)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BiljetEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD0)
+    				{
+    					primaryStage.setScene(BiljetEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BiljetEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD1)
+    				{
+    					primaryStage.setScene(BiljetEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BiljetEN);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[3].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(BiljetEN);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[4].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(BiljetEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD2)
+    				{
+    					primaryStage.setScene(BiljetEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
     	options[0].setStyle("-fx-font-size: 20pt;");
     	options[1].setStyle("-fx-font-size: 20pt;");
     	options[2].setStyle("-fx-font-size: 20pt;");
-    	options[3].setStyle("-fx-font-size: 20pt;");
-    	options[4].setStyle("-fx-font-size: 20pt;");
     	
     	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[4].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	
-    	for (int i=0; i<5; i++)
+    	for (int i=0; i<3; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
@@ -1417,59 +1431,56 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€90"),
-    		new Button("€100"),
-    		new Button("€250"),
-    		new Button("Another Amount")
+    		new Button("€100  (3)"),
+    		new Button("€250  (4)"),
+    		new Button("Another Amount  (5)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BiljetEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD3)
+    				{
+    					primaryStage.setScene(BiljetEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BiljetEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD4)
+    				{
+    					primaryStage.setScene(BiljetEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BiljetEN);
-    				window.setFullScreen(true);
-    			}
-    		});
-    	
-    	options[3].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(AnderEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD5)
+    				{
+    					primaryStage.setScene(BiljetEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
     	options[0].setStyle("-fx-font-size: 20pt;");
     	options[1].setStyle("-fx-font-size: 20pt;");
     	options[2].setStyle("-fx-font-size: 20pt;");
-    	options[3].setStyle("-fx-font-size: 20pt;");
     	
     	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-    	for (int i=0; i<4; i++)
+    	
+    	for (int i=0; i<3; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
@@ -1513,18 +1524,21 @@ public class Gui extends Application
         };
     	grid.add(userTextField, 1, 1);
     	
-    	Button ok = new Button("OK");
+    	Button ok = new Button("OK  (A)");
     	ok.setStyle("-fx-font-size: 20pt;");
     	ok.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	grid.add(ok, 2, 2);
     	
-    	ok.setOnAction(new EventHandler<ActionEvent>()
+    	ok.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				userTextField.clear();
-    				window.setScene(BiljetEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.A)
+    				{
+    					userTextField.clear();
+    					primaryStage.setScene(BiljetEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
@@ -1538,59 +1552,56 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€5"),
-    		new Button("€10"),
-    		new Button("€20"),
-    		new Button("€50")
+    		new Button("€10(0)"),
+    		new Button("€20(1)"),
+    		new Button("€50(2)")
     	};
     	
-    	options[0].setOnAction(new EventHandler<ActionEvent>()
+    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD0)
+    				{
+    					primaryStage.setScene(BonEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[1].setOnAction(new EventHandler<ActionEvent>()
+    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD1)
+    				{
+    					primaryStage.setScene(BonEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	options[2].setOnAction(new EventHandler<ActionEvent>()
+    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
-    			}
-    		});
-    		
-    	options[3].setOnAction(new EventHandler<ActionEvent>()
-    		{
-    			public void handle(ActionEvent event)
-    			{
-    				window.setScene(BonEN);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.NUMPAD2)
+    				{
+    					primaryStage.setScene(BonEN);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
     	options[0].setStyle("-fx-font-size: 20pt;");
     	options[1].setStyle("-fx-font-size: 20pt;");
     	options[2].setStyle("-fx-font-size: 20pt;");
-    	options[3].setStyle("-fx-font-size: 20pt;");
     	
     	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[3].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-    	for (int i=0; i<4; i++)
+    	
+    	for (int i=0; i<3; i++)
     	{
     		vbox.getChildren().add(options[i]);
     	}
@@ -1608,27 +1619,33 @@ public class Gui extends Application
     	scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
     	grid.add(scenetitle, 0, 0, 2, 1);
 
-    	Button Ja = new Button("YES");
+    	Button Ja = new Button("YES  (A)");
     	grid.add(Ja, 1, 1);
 
-    	Button Nee = new Button("NO");
+    	Button Nee = new Button("NO  (B)");
     	grid.add(Nee, 2, 1);
 
-    	Ja.setOnAction(new EventHandler<ActionEvent>()
+    	Ja.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Welkom);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.A)
+    				{
+    					primaryStage.setScene(Welkom);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
-    	Nee.setOnAction(new EventHandler<ActionEvent>()
+    	Nee.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
-    			public void handle(ActionEvent event)
+    			public void handle(KeyEvent event)
     			{
-    				window.setScene(Welkom);
-    				window.setFullScreen(true);
+    				if (event.getCode() == KeyCode.B)
+    				{
+    					primaryStage.setScene(Welkom);
+    					primaryStage.setFullScreen(true);
+    				}
     			}
     		});
     	
