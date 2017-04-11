@@ -17,8 +17,11 @@ import javafx.beans.binding.*;
 
 public class Gui extends Application
 {
-	private Stage primaryStage;
+	Stage primaryStage;
 	Scene Welkom, Cardcode, Home, Snelpin, Saldo, Pinnen, Ander, Biljet, Bon, CardcodeEN, HomeEN, SnelpinEN, SaldoEN, PinnenEN, AnderEN, BiljetEN, BonEN;
+	PasswordField pincode, pincodeNL;
+	TextField userTextField, userTextFieldNL;
+	Label geld, geldNL;
 	
 	//EventHandler<KeyEvent>(KeyCode.NUMBER_SIGN = KeyCode.TAB);//KeyCode.TAB = KeyCode.NUMBER_SIGN;
 	//KeyCode.BACK_SPACE == KeyCode.Asterisk;
@@ -39,7 +42,6 @@ public class Gui extends Application
         int width = (int) Screen.getPrimary().getBounds().getWidth();
         int height = (int) Screen.getPrimary().getBounds().getHeight();
 
-		
 		BorderPane Welkom1 = new BorderPane();
         Welkom1.setTop(addHBoxTop());
         Welkom1.setCenter(addStackPane());
@@ -171,7 +173,7 @@ public class Gui extends Application
         BonEN1.setCenter(addGridPaneBonEN());
         BonEN1.setBottom(addHBoxDown());
         
-    	BonEN = new Scene(BonEN1);
+    	BonEN = new Scene(BonEN1, width, height);
     	
     	primaryStage.setFullScreen(true);
         primaryStage.setTitle("Geek Incorporated");
@@ -211,7 +213,6 @@ public class Gui extends Application
     		new Button("NL  (A)"),
     		new Button("EN  (B)")
     	};
-    	
     	
     	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
@@ -268,37 +269,25 @@ public class Gui extends Application
     	pw.setFont(Font.font("Tahoma", 40));
     	grid.add(pw, 0, 1);
     	
-    	PasswordField pincode = new PasswordField()
+    	pincodeNL = new PasswordField()
     	{
-            //@Override
             public void replaceText(int start, int end, String text)
             {
                 if (!text.matches("[a-z, A-Z, #, *]"))
                 {
                     super.replaceText(start, end, text);   
                 }
-                
-                /*if (getText().length() = 4)
-                {
-                      end(); 
-                }*/
             }
  
-            //@Override
             public void replaceSelection(String text)
             {
                 if (!text.matches("[a-z, A-Z, #, *]"))
                 {
                     super.replaceSelection(text);
                 }
-                
-                /*if (getText().length() = 4)
-                {
-                    end();
-                }*/
             }
         };
-    	grid.add(pincode, 1, 1);
+    	grid.add(pincodeNL, 1, 1);
     	
     	Button ok = new Button("OK  (A)");
     	ok.setStyle("-fx-font-size: 20pt;");
@@ -306,31 +295,42 @@ public class Gui extends Application
     	grid.add(ok, 2, 2);
     	
     	ok.setOnKeyPressed(new EventHandler<KeyEvent>()
+    	{
+    		public void handle(KeyEvent event)
     		{
-    			public void handle(KeyEvent event)
+    			if (event.getCode() == KeyCode.A)
     			{
-    				if (event.getCode() == KeyCode.A)
+    				for(int i=0;i<3;i++)
     				{
-    					for(int i=0;i<3;i++)
+    					if (pincodeNL.getText().equals("1234") && i<2)
     					{
-    						if ("1234".equals(pincode.getText()))
-    							{
-    								pincode.clear();
-    								primaryStage.setScene(Home);
-    								primaryStage.setFullScreen(true);
-    							}
-    						
-    						else if (!"1234".equals(pincode.getText()))
-    							{
-    								Label l = new Label("Verkeerde pincode");
-    								l.setFont(Font.font("Tahoma", 40));
-    								grid.add(l, 3, 1);
-    							}
+    						pincodeNL.clear();
+    						primaryStage.setScene(Home);
+    						primaryStage.setFullScreen(true);
+    						System.out.println("i1:"+i);
     					}
+    					
+    					else if (!pincodeNL.getText().equals("1234") && i<2)
+    					{
+    						pincodeNL.clear();
+    						Label n = new Label("poging: "+i);
+    						grid.add(n, 2, 1);
+    						n.setFont(Font.font("Tahoma", 40));
+    						//Melding.display("Verkeerde pincode", "Verkeerde pincode");
+    						System.out.println("i2:"+i);
+    					}
+    					
+    					else if (!pincodeNL.getText().equals("1234") && i==3)
+                        {
+                            pincodeNL.clear();
+                            primaryStage.setScene(Welkom);
+                            primaryStage.setFullScreen(true);
+                            System.out.println("i3:"+i);
+                        }
     				}
     			}
-    		});
-    	
+    		}
+    	});
     	return grid;
     }
     
@@ -347,7 +347,7 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.D)
     				{
-    					//pincode.clear();
+    					pincodeNL.clear();
     					primaryStage.setScene(Welkom);
     					primaryStage.setFullScreen(true);
     				}
@@ -555,8 +555,8 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.C)
     				{
-    					//geld.clear();
-    					//userTextField.clear();
+    					geldNL.setText(null);
+    					userTextFieldNL.clear();
     					primaryStage.setScene(Home);
     					primaryStage.setFullScreen(true);
     				}
@@ -569,8 +569,8 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.D)
     				{
-    					//geld.clear();
-    					//userTextField.clear();
+    					geldNL.setText(null);
+    					userTextFieldNL.clear();
     					primaryStage.setScene(Welkom);
     					primaryStage.setFullScreen(true);
     				}
@@ -605,7 +605,7 @@ public class Gui extends Application
     	userName.setFont(Font.font("Tahoma", 40));
     	grid.add(userName, 0, 1);
 
-    	Label geld = new Label()
+    	geldNL = new Label()
     	{
             //@Override
             public void replaceText(int start, int end, String text)
@@ -626,8 +626,8 @@ public class Gui extends Application
             }
         };
         
-        geld.setFont(Font.font("Tahoma", 40));
-    	grid.add(geld, 1, 1);
+        geldNL.setFont(Font.font("Tahoma", 40));
+    	grid.add(geldNL, 1, 1);
     	
     	return grid;
     }
@@ -648,7 +648,7 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.A)
     				{
-    					//geld.clear();
+    					geldNL.setText(null);
     					primaryStage.setScene(Pinnen);
     					primaryStage.setFullScreen(true);
     				}
@@ -772,7 +772,7 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.NUMPAD5)
     				{
-    					primaryStage.setScene(Biljet);
+    					primaryStage.setScene(Ander);
     					primaryStage.setFullScreen(true);
     				}
     			}
@@ -808,9 +808,8 @@ public class Gui extends Application
     	userName.setFont(Font.font("Tahoma", 40));
     	grid.add(userName, 0, 1);
 
-    	TextField userTextField = new TextField()
+    	userTextFieldNL = new TextField()
     	{
-            //@Override
             public void replaceText(int start, int end, String text)
             {
                 if (!text.matches("[a-z, A-Z, #, *]"))
@@ -819,7 +818,6 @@ public class Gui extends Application
                 }
             }
  
-            //@Override
             public void replaceSelection(String text)
             {
                 if (!text.matches("[a-z, A-Z, #, *]"))
@@ -829,8 +827,8 @@ public class Gui extends Application
             }
         };
         
-        userTextField.setFont(Font.font("Tahoma", 40));
-    	grid.add(userTextField, 1, 1);
+        userTextFieldNL.setFont(Font.font("Tahoma", 40));
+    	grid.add(userTextFieldNL, 1, 1);
     	
     	Button ok = new Button("OK  (A)");
     	ok.setStyle("-fx-font-size: 20pt;");
@@ -843,9 +841,18 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.A)
     				{
-    					userTextField.clear();
-    					primaryStage.setScene(Biljet);
-    					primaryStage.setFullScreen(true);
+    					int x = Integer.parseInt(userTextFieldNL.getText());
+    					if(x%10==0)
+    					{
+    						userTextFieldNL.clear();
+    						primaryStage.setScene(Biljet);
+    						primaryStage.setFullScreen(true);
+    					}
+    					
+    					else
+    					{
+    						userTextFieldNL.clear();
+    					}
     				}
     			}
     		});
@@ -984,7 +991,7 @@ public class Gui extends Application
     	pw.setFont(Font.font("Tahoma", 40));
     	grid.add(pw, 0, 1);
 
-    	PasswordField pincode = new PasswordField()
+    	pincode = new PasswordField()
     	{
             //@Override
             public void replaceText(int start, int end, String text)
@@ -1040,7 +1047,7 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.D)
     				{
-    					//pincode.clear();
+    					pincode.clear();
     					primaryStage.setScene(Welkom);
     					primaryStage.setFullScreen(true);
     				}
@@ -1249,8 +1256,8 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.C)
     				{
-    					//geld.clear();
-    					//userTextField.clear();
+    					geld.setText(null);
+    					userTextField.clear();
     					primaryStage.setScene(HomeEN);
     					primaryStage.setFullScreen(true);
     				}
@@ -1263,8 +1270,8 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.D)
     				{
-    					//geld.clear();
-    					//userTextField.clear();
+    					geld.setText(null);
+    					userTextField.clear();
     					primaryStage.setScene(Welkom);
     					primaryStage.setFullScreen(true);
     				}
@@ -1299,7 +1306,7 @@ public class Gui extends Application
     	userName.setFont(Font.font("Tahoma", 40));
     	grid.add(userName, 0, 1);
 
-    	Label geld = new Label()
+    	geld = new Label()
     	{
             //@Override
             public void replaceText(int start, int end, String text)
@@ -1342,7 +1349,7 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.A)
     				{
-    					//geld.clear();
+    					geld.setText(null);
     					primaryStage.setScene(PinnenEN);
     					primaryStage.setFullScreen(true);
     				}
@@ -1367,9 +1374,9 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€10(0)"),
-    		new Button("€20(1)"),
-    		new Button("€50(2)")
+    		new Button("€10  (0)"),
+    		new Button("€20  (1)"),
+    		new Button("€50  (2)")
     	};
     	
     	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
@@ -1466,7 +1473,7 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.NUMPAD5)
     				{
-    					primaryStage.setScene(BiljetEN);
+    					primaryStage.setScene(AnderEN);
     					primaryStage.setFullScreen(true);
     				}
     			}
@@ -1502,9 +1509,8 @@ public class Gui extends Application
     	userName.setFont(Font.font("Tahoma", 40));
     	grid.add(userName, 0, 1);
 
-    	TextField userTextField = new TextField()
+    	userTextField = new TextField()
     	{
-            //@Override
             public void replaceText(int start, int end, String text)
             {
                 if (!text.matches("[a-z, A-Z, #, *]"))
@@ -1512,8 +1518,7 @@ public class Gui extends Application
                     super.replaceText(start, end, text);   
                 }
             }
- 
-            //@Override
+            
             public void replaceSelection(String text)
             {
                 if (!text.matches("[a-z, A-Z, #, *]"))
@@ -1529,15 +1534,25 @@ public class Gui extends Application
     	ok.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	grid.add(ok, 2, 2);
     	
+    	
     	ok.setOnKeyPressed(new EventHandler<KeyEvent>()
     		{
     			public void handle(KeyEvent event)
     			{
     				if (event.getCode() == KeyCode.A)
     				{
-    					userTextField.clear();
-    					primaryStage.setScene(BiljetEN);
-    					primaryStage.setFullScreen(true);
+    					int x = Integer.parseInt(userTextField.getText());
+    					if(x%10==0)
+    					{
+    						userTextField.clear();
+    						primaryStage.setScene(BiljetEN);
+    						primaryStage.setFullScreen(true);
+    					}
+    					
+    					else
+    					{
+    						userTextField.clear();
+    					}
     				}
     			}
     		});
@@ -1552,9 +1567,9 @@ public class Gui extends Application
 
     	Button options[] = new Button[]
     	{
-    		new Button("€10(0)"),
-    		new Button("€20(1)"),
-    		new Button("€50(2)")
+    		new Button("€10  (0)"),
+    		new Button("€20  (1)"),
+    		new Button("€50  (2)")
     	};
     	
     	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
