@@ -1,3 +1,19 @@
+import javafx.animation.*;
+import javafx.collections.*;
+import javafx.css.*;
+import javafx.embed.swing.*;
+import javafx.fxml.*;
+import javafx.print.*;
+import javafx.scene.canvas.*;
+import javafx.scene.chart.*;
+import javafx.scene.control.cell.*;
+import javafx.scene.media.*;
+import javafx.scene.paint.*;
+import javafx.scene.transform.*;
+import javafx.scene.web.*;
+import javafx.util.*;
+import javafx.util.converter.*;     
+import netscape.javascript.*;
 import javafx.application.*;
 import javafx.event.*;
 import javafx.scene.layout.*;
@@ -14,6 +30,7 @@ import javafx.beans.*;
 import javafx.beans.property.adapter.*;
 import javafx.beans.property.*;
 import javafx.beans.binding.*;
+import javafx.scene.shape.*;
 
 public class Gui extends Application
 {
@@ -294,20 +311,22 @@ public class Gui extends Application
     	ok.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     	grid.add(ok, 2, 2);
     	
+    	for(int i=0;i<3;i++){
     	ok.setOnKeyPressed(new EventHandler<KeyEvent>()
     	{
     		public void handle(KeyEvent event)
     		{
     			if (event.getCode() == KeyCode.A)
     			{
-    				for(int i=0;i<3;i++)
-    				{
+    				int i = 0;
+    				
     					if (pincodeNL.getText().equals("1234") && i<2)
     					{
     						pincodeNL.clear();
     						primaryStage.setScene(Home);
     						primaryStage.setFullScreen(true);
     						System.out.println("i1:"+i);
+    						i=0;
     					}
     					
     					else if (!pincodeNL.getText().equals("1234") && i<2)
@@ -316,21 +335,52 @@ public class Gui extends Application
     						Label n = new Label("poging: "+i);
     						grid.add(n, 2, 1);
     						n.setFont(Font.font("Tahoma", 40));
-    						//Melding.display("Verkeerde pincode", "Verkeerde pincode");
+    						
+    						Popup popup = new Popup();
+    						popup.show(primaryStage);
+    						
+    						Label la = new Label();
+    						la.setText("Verkeerde Pincode"+i);
+    						la.setFont(Font.font("Tahoma", 40));
+    						
+    						Button close =new Button("Sluiten  (A)");
+    						close.setOnKeyPressed(new EventHandler<KeyEvent>()
+    							{
+    								@Override
+    								public void handle(KeyEvent event)
+    								{
+    									if (event.getCode() == KeyCode.A)
+    									{
+    										popup.hide();
+    										
+    									}
+    								}
+    							});
+    						VBox vbox = new VBox(10);
+    						vbox.getChildren().addAll(la, close);
+    						
+    						int width = (int) Screen.getPrimary().getBounds().getWidth();
+    						int height = (int) Screen.getPrimary().getBounds().getHeight();
+    						popup.setX(width/2);
+    						popup.setY(height/2);
+    						popup.getContent().addAll(new Rectangle(500, 100, Color.AQUAMARINE), vbox);
+    						
     						System.out.println("i2:"+i);
+    						i++;
     					}
     					
-    					else if (!pincodeNL.getText().equals("1234") && i==3)
+    					else if (!pincodeNL.getText().equals("1234") && i==2)
                         {
                             pincodeNL.clear();
                             primaryStage.setScene(Welkom);
                             primaryStage.setFullScreen(true);
                             System.out.println("i3:"+i);
+                           i=3;
                         }
     				}
     			}
-    		}
-    	});
+    		
+    	});}
     	return grid;
     }
     
