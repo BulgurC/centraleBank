@@ -35,7 +35,7 @@ import javafx.scene.shape.*;
 public class Gui extends Application
 {
 	Stage primaryStage;
-	Scene Welkom, Cardcode, Home, Snelpin, Saldo, Pinnen, Ander, Biljet, Bon, CardcodeEN, HomeEN, SnelpinEN, SaldoEN, PinnenEN, AnderEN, BiljetEN, BonEN;
+	Scene Welkom, Cardcode, Home, Saldo, Pinnen, Ander, Biljet, Bon, CardcodeEN, HomeEN, SaldoEN, PinnenEN, AnderEN, BiljetEN, BonEN;
 	PasswordField pincode, pincodeNL;
 	TextField userTextField, userTextFieldNL;
 	Label geld, geldNL;
@@ -81,15 +81,6 @@ public class Gui extends Application
 
         Home = new Scene(Home1, width, height);
         
-        BorderPane Snelpin1 = new BorderPane();
-    	Snelpin1.setTop(addHBoxTop());
-        Snelpin1.setLeft(addVBoxSnelpinl());
-        Snelpin1.setCenter(addStackPane());
-        Snelpin1.setRight(addVBoxSnelpinr());
-        Snelpin1.setBottom(addHBoxBottom());
-        
-    	Snelpin = new Scene(Snelpin1, width, height);
-    	
     	BorderPane Saldo1 = new BorderPane();
     	Saldo1.setTop(addHBoxTop());
         Saldo1.setLeft(addVBoxSaldo());
@@ -144,15 +135,6 @@ public class Gui extends Application
 
         HomeEN = new Scene(HomeEN1, width, height);
         
-        BorderPane SnelpinEN1 = new BorderPane();
-    	SnelpinEN1.setTop(addHBoxTop());
-        SnelpinEN1.setLeft(addVBoxSnelpinENl());
-        SnelpinEN1.setCenter(addStackPane());
-        SnelpinEN1.setRight(addVBoxSnelpinENr());
-        SnelpinEN1.setBottom(addHBoxDown());
-        
-    	SnelpinEN = new Scene(SnelpinEN1, width, height);
-    	
     	BorderPane SaldoEN1 = new BorderPane();
     	SaldoEN1.setTop(addHBoxTop());
         SaldoEN1.setLeft(addVBoxSaldoEN());
@@ -332,10 +314,7 @@ public class Gui extends Application
     					else if (!pincodeNL.getText().equals("1234") && i<2)
     					{
     						pincodeNL.clear();
-    						Label n = new Label("poging: "+i);
-    						grid.add(n, 2, 1);
-    						n.setFont(Font.font("Tahoma", 40));
-    						
+
     						Popup popup = new Popup();
     						popup.show(primaryStage);
     						
@@ -352,7 +331,6 @@ public class Gui extends Application
     									if (event.getCode() == KeyCode.A)
     									{
     										popup.hide();
-    										
     									}
     								}
     							});
@@ -372,6 +350,35 @@ public class Gui extends Application
     					else if (!pincodeNL.getText().equals("1234") && i==2)
                         {
                             pincodeNL.clear();
+                            
+                            Popup popup = new Popup();
+    						popup.show(primaryStage);
+    						
+    						Label la = new Label();
+    						la.setText("Pas geblokkeerd");
+    						la.setFont(Font.font("Tahoma", 40));
+    						
+    						Button close =new Button("Sluiten  (A)");
+    						close.setOnKeyPressed(new EventHandler<KeyEvent>()
+    							{
+    								@Override
+    								public void handle(KeyEvent event)
+    								{
+    									if (event.getCode() == KeyCode.A)
+    									{
+    										popup.hide();
+    									}
+    								}
+    							});
+    						VBox vbox = new VBox(10);
+    						vbox.getChildren().addAll(la, close);
+    						
+    						int width = (int) Screen.getPrimary().getBounds().getWidth();
+    						int height = (int) Screen.getPrimary().getBounds().getHeight();
+    						popup.setX(width/2);
+    						popup.setY(height/2);
+    						popup.getContent().addAll(new Rectangle(500, 100, Color.AQUAMARINE), vbox);
+    						
                             primaryStage.setScene(Welkom);
                             primaryStage.setFullScreen(true);
                             System.out.println("i3:"+i);
@@ -420,7 +427,7 @@ public class Gui extends Application
     	{
     		new Button("Geld Opnemen  (1)"),
     		new Button("Saldo  (2)"),
-    		new Button("Snel Pinnen  (3)")
+    		new Button("Snel Pinnen €70  (3)")
     	};
     	
     	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
@@ -453,7 +460,7 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.NUMPAD3)
     				{
-    					primaryStage.setScene(Snelpin);
+    					primaryStage.setScene(Welkom);
     					primaryStage.setFullScreen(true);
     				}
     			}
@@ -472,119 +479,6 @@ public class Gui extends Application
     		vbox.getChildren().add(options[i]);
     	}
     	
-    	return vbox;
-    }
-    
-    public VBox addVBoxSnelpinl()
-    {
-    	VBox vbox = new VBox();
-    	vbox.setSpacing(8);
-
-    	Button options[] = new Button[]
-    	{
-    		new Button("€10  (0)"),
-    		new Button("€20  (1)"),
-    		new Button("€50  (2)")
-    	};
-    	
-    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
-    		{
-    			public void handle(KeyEvent event)
-    			{
-    				if (event.getCode() == KeyCode.NUMPAD0)
-    				{
-    					primaryStage.setScene(Bon);
-    					primaryStage.setFullScreen(true);
-    				}
-    			}
-    		});
-    	
-    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
-    		{
-    			public void handle(KeyEvent event)
-    			{
-    				if (event.getCode() == KeyCode.NUMPAD1)
-    				{
-    					primaryStage.setScene(Bon);
-    					primaryStage.setFullScreen(true);
-    				}
-    			}
-    		});
-    	
-    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
-    		{
-    			public void handle(KeyEvent event)
-    			{
-    				if (event.getCode() == KeyCode.NUMPAD2)
-    				{
-    					primaryStage.setScene(Bon);
-    					primaryStage.setFullScreen(true);
-    				}
-    			}
-    		});
-    	
-    	options[0].setStyle("-fx-font-size: 20pt;");
-    	options[1].setStyle("-fx-font-size: 20pt;");
-    	options[2].setStyle("-fx-font-size: 20pt;");
-    	
-    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-    	for (int i=0; i<3; i++)
-    	{
-    		vbox.getChildren().add(options[i]);
-    	}
-
-    	return vbox;
-    }
-    
-    public VBox addVBoxSnelpinr()
-    {
-    	VBox vbox = new VBox();
-    	vbox.setSpacing(8);
-
-    	Button options[] = new Button[]
-    	{
-    		new Button("€100  (3)"),
-    		new Button("€250  (4)")
-    	};
-    	
-    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
-    		{
-    			public void handle(KeyEvent event)
-    			{
-    				if (event.getCode() == KeyCode.NUMPAD3)
-    				{
-    					primaryStage.setScene(Bon);
-    					primaryStage.setFullScreen(true);
-    				}
-    			}
-    		});
-    	
-    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
-    		{
-    			public void handle(KeyEvent event)
-    			{
-    				if (event.getCode() == KeyCode.NUMPAD4)
-    				{
-    					primaryStage.setScene(Bon);
-    					primaryStage.setFullScreen(true);
-    				}
-    			}
-    		});
-    	
-    	options[0].setStyle("-fx-font-size: 20pt;");
-    	options[1].setStyle("-fx-font-size: 20pt;");
-    	
-    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	
-    	for (int i=0; i<2; i++)
-    	{
-    		vbox.getChildren().add(options[i]);
-    	}
-
     	return vbox;
     }
     
@@ -928,8 +822,42 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.NUMPAD0)
     				{
-    					primaryStage.setScene(Bon);
-    					primaryStage.setFullScreen(true);
+    					//if()
+    					//{
+    						Popup popup = new Popup();
+    						popup.show(primaryStage);
+    						
+    						Label la = new Label();
+    						la.setText("Weinig geld");
+    						la.setFont(Font.font("Tahoma", 40));
+    						
+    						Button close =new Button("Sluiten  (A)");
+    						close.setOnKeyPressed(new EventHandler<KeyEvent>()
+    							{
+    								@Override
+    								public void handle(KeyEvent event)
+    								{
+    									if (event.getCode() == KeyCode.A)
+    									{
+    										popup.hide();
+    									}
+    								}
+    							});
+    						VBox vbox = new VBox(10);
+    						vbox.getChildren().addAll(la, close);
+    						
+    						int width = (int) Screen.getPrimary().getBounds().getWidth();
+    						int height = (int) Screen.getPrimary().getBounds().getHeight();
+    						popup.setX(width/2);
+    						popup.setY(height/2);
+    						popup.getContent().addAll(new Rectangle(500, 100, Color.AQUAMARINE), vbox);
+    					//}
+    					
+    					//else
+    					//{
+    						primaryStage.setScene(Bon);
+    						primaryStage.setFullScreen(true);
+    					//}
     				}
     			}
     		});
@@ -940,8 +868,42 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.NUMPAD1)
     				{
-    					primaryStage.setScene(Bon);
-    					primaryStage.setFullScreen(true);
+    					//if()
+    					//{
+    						Popup popup = new Popup();
+    						popup.show(primaryStage);
+    						
+    						Label la = new Label();
+    						la.setText("Weinig geld");
+    						la.setFont(Font.font("Tahoma", 40));
+    						
+    						Button close =new Button("Sluiten  (A)");
+    						close.setOnKeyPressed(new EventHandler<KeyEvent>()
+    							{
+    								@Override
+    								public void handle(KeyEvent event)
+    								{
+    									if (event.getCode() == KeyCode.A)
+    									{
+    										popup.hide();
+    									}
+    								}
+    							});
+    						VBox vbox = new VBox(10);
+    						vbox.getChildren().addAll(la, close);
+    						
+    						int width = (int) Screen.getPrimary().getBounds().getWidth();
+    						int height = (int) Screen.getPrimary().getBounds().getHeight();
+    						popup.setX(width/2);
+    						popup.setY(height/2);
+    						popup.getContent().addAll(new Rectangle(500, 100, Color.AQUAMARINE), vbox);
+    					//}
+    					
+    					//else
+    					//{
+    						primaryStage.setScene(Bon);
+    						primaryStage.setFullScreen(true);
+    					//}
     				}
     			}
     		});
@@ -952,8 +914,42 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.NUMPAD2)
     				{
-    					primaryStage.setScene(Bon);
-    					primaryStage.setFullScreen(true);
+    					//if()
+    					//{
+    						Popup popup = new Popup();
+    						popup.show(primaryStage);
+    						
+    						Label la = new Label();
+    						la.setText("Weinig geld");
+    						la.setFont(Font.font("Tahoma", 40));
+    						
+    						Button close =new Button("Sluiten  (A)");
+    						close.setOnKeyPressed(new EventHandler<KeyEvent>()
+    							{
+    								@Override
+    								public void handle(KeyEvent event)
+    								{
+    									if (event.getCode() == KeyCode.A)
+    									{
+    										popup.hide();
+    									}
+    								}
+    							});
+    						VBox vbox = new VBox(10);
+    						vbox.getChildren().addAll(la, close);
+    						
+    						int width = (int) Screen.getPrimary().getBounds().getWidth();
+    						int height = (int) Screen.getPrimary().getBounds().getHeight();
+    						popup.setX(width/2);
+    						popup.setY(height/2);
+    						popup.getContent().addAll(new Rectangle(500, 100, Color.AQUAMARINE), vbox);
+    					//}
+    					
+    					//else
+    					//{
+    						primaryStage.setScene(Bon);
+    						primaryStage.setFullScreen(true);
+    					//}
     				}
     			}
     		});
@@ -1074,9 +1070,90 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.A)
     				{
-    					pincode.clear();
-    					primaryStage.setScene(HomeEN);
-    					primaryStage.setFullScreen(true);
+    					int i = 0;
+    				
+    					if (pincode.getText().equals("1234") && i<2)
+    					{
+    						pincode.clear();
+    						primaryStage.setScene(HomeEN);
+    						primaryStage.setFullScreen(true);
+    						System.out.println("i1:"+i);
+    						i=0;
+    					}
+    					
+    					else if (!pincode.getText().equals("1234") && i<2)
+    					{
+    						pincode.clear();
+
+    						Popup popup = new Popup();
+    						popup.show(primaryStage);
+    						
+    						Label la = new Label();
+    						la.setText("Wrong PIN"+i);
+    						la.setFont(Font.font("Tahoma", 40));
+    						
+    						Button close =new Button("Sluiten  (A)");
+    						close.setOnKeyPressed(new EventHandler<KeyEvent>()
+    							{
+    								@Override
+    								public void handle(KeyEvent event)
+    								{
+    									if (event.getCode() == KeyCode.A)
+    									{
+    										popup.hide();
+    									}
+    								}
+    							});
+    						VBox vbox = new VBox(10);
+    						vbox.getChildren().addAll(la, close);
+    						
+    						int width = (int) Screen.getPrimary().getBounds().getWidth();
+    						int height = (int) Screen.getPrimary().getBounds().getHeight();
+    						popup.setX(width/2);
+    						popup.setY(height/2);
+    						popup.getContent().addAll(new Rectangle(500, 100, Color.AQUAMARINE), vbox);
+    						
+    						System.out.println("i2:"+i);
+    						i++;
+    					}
+    					
+    					else if (!pincode.getText().equals("1234") && i==2)
+                        {
+                            pincode.clear();
+                            
+                            Popup popup = new Popup();
+    						popup.show(primaryStage);
+    						
+    						Label la = new Label();
+    						la.setText("Pas Blocked");
+    						la.setFont(Font.font("Tahoma", 40));
+    						
+    						Button close =new Button("Sluiten  (A)");
+    						close.setOnKeyPressed(new EventHandler<KeyEvent>()
+    							{
+    								@Override
+    								public void handle(KeyEvent event)
+    								{
+    									if (event.getCode() == KeyCode.A)
+    									{
+    										popup.hide();
+    									}
+    								}
+    							});
+    						VBox vbox = new VBox(10);
+    						vbox.getChildren().addAll(la, close);
+    						
+    						int width = (int) Screen.getPrimary().getBounds().getWidth();
+    						int height = (int) Screen.getPrimary().getBounds().getHeight();
+    						popup.setX(width/2);
+    						popup.setY(height/2);
+    						popup.getContent().addAll(new Rectangle(500, 100, Color.AQUAMARINE), vbox);
+    						
+                            primaryStage.setScene(Welkom);
+                            primaryStage.setFullScreen(true);
+                            System.out.println("i3:"+i);
+                           i=3;
+                        }
     				}
     			}
     		});
@@ -1121,7 +1198,7 @@ public class Gui extends Application
     	{
     		new Button("Withdraw Money  (1)"),
     		new Button("Balance  (2)"),
-    		new Button("Withdraw Money Fast  (3)")
+    		new Button("Withdraw Money Fast €70  (3)")
     	};
     	
     	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
@@ -1154,7 +1231,7 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.NUMPAD3)
     				{
-    					primaryStage.setScene(SnelpinEN);
+    					primaryStage.setScene(Welkom);
     					primaryStage.setFullScreen(true);
     				}
     			}
@@ -1173,119 +1250,6 @@ public class Gui extends Application
     		vbox.getChildren().add(options[i]);
     	}
     	
-    	return vbox;
-    }
-    
-    public VBox addVBoxSnelpinENl()
-    {
-    	VBox vbox = new VBox();
-    	vbox.setSpacing(8);
-
-    	Button options[] = new Button[]
-    	{
-    		new Button("€10  (0)"),
-    		new Button("€20  (1)"),
-    		new Button("€50  (2)")
-    	};
-    	
-    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
-    		{
-    			public void handle(KeyEvent event)
-    			{
-    				if (event.getCode() == KeyCode.NUMPAD0)
-    				{
-    					primaryStage.setScene(BonEN);
-    					primaryStage.setFullScreen(true);
-    				}
-    			}
-    		});
-    	
-    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
-    		{
-    			public void handle(KeyEvent event)
-    			{
-    				if (event.getCode() == KeyCode.NUMPAD1)
-    				{
-    					primaryStage.setScene(BonEN);
-    					primaryStage.setFullScreen(true);
-    				}
-    			}
-    		});
-    	
-    	options[2].setOnKeyPressed(new EventHandler<KeyEvent>()
-    		{
-    			public void handle(KeyEvent event)
-    			{
-    				if (event.getCode() == KeyCode.NUMPAD2)
-    				{
-    					primaryStage.setScene(BonEN);
-    					primaryStage.setFullScreen(true);
-    				}
-    			}
-    		});
-    	
-    	options[0].setStyle("-fx-font-size: 20pt;");
-    	options[1].setStyle("-fx-font-size: 20pt;");
-    	options[2].setStyle("-fx-font-size: 20pt;");
-    	
-    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[2].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	
-    	for (int i=0; i<3; i++)
-    	{
-    		vbox.getChildren().add(options[i]);
-    	}
-
-    	return vbox;
-    }
-    
-    public VBox addVBoxSnelpinENr()
-    {
-    	VBox vbox = new VBox();
-    	vbox.setSpacing(8);
-
-    	Button options[] = new Button[]
-    	{
-    		new Button("€100  (3)"),
-    		new Button("€250  (4)")
-    	};
-    	
-    	options[0].setOnKeyPressed(new EventHandler<KeyEvent>()
-    		{
-    			public void handle(KeyEvent event)
-    			{
-    				if (event.getCode() == KeyCode.NUMPAD3)
-    				{
-    					primaryStage.setScene(BonEN);
-    					primaryStage.setFullScreen(true);
-    				}
-    			}
-    		});
-    	
-    	options[1].setOnKeyPressed(new EventHandler<KeyEvent>()
-    		{
-    			public void handle(KeyEvent event)
-    			{
-    				if (event.getCode() == KeyCode.NUMPAD4)
-    				{
-    					primaryStage.setScene(BonEN);
-    					primaryStage.setFullScreen(true);
-    				}
-    			}
-    		});
-    	
-    	options[0].setStyle("-fx-font-size: 20pt;");
-    	options[1].setStyle("-fx-font-size: 20pt;");
-    	
-    	options[0].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	options[1].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    	
-    	for (int i=0; i<2; i++)
-    	{
-    		vbox.getChildren().add(options[i]);
-    	}
-
     	return vbox;
     }
     
@@ -1628,8 +1592,42 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.NUMPAD0)
     				{
-    					primaryStage.setScene(BonEN);
-    					primaryStage.setFullScreen(true);
+    					//if()
+    					//{
+    						Popup popup = new Popup();
+    						popup.show(primaryStage);
+    						
+    						Label la = new Label();
+    						la.setText("NO money");
+    						la.setFont(Font.font("Tahoma", 40));
+    						
+    						Button close =new Button("Sluiten  (A)");
+    						close.setOnKeyPressed(new EventHandler<KeyEvent>()
+    							{
+    								@Override
+    								public void handle(KeyEvent event)
+    								{
+    									if (event.getCode() == KeyCode.A)
+    									{
+    										popup.hide();
+    									}
+    								}
+    							});
+    						VBox vbox = new VBox(10);
+    						vbox.getChildren().addAll(la, close);
+    						
+    						int width = (int) Screen.getPrimary().getBounds().getWidth();
+    						int height = (int) Screen.getPrimary().getBounds().getHeight();
+    						popup.setX(width/2);
+    						popup.setY(height/2);
+    						popup.getContent().addAll(new Rectangle(500, 100, Color.AQUAMARINE), vbox);
+    					//}
+    					
+    					//else
+    					//{
+    						primaryStage.setScene(BonEN);
+    						primaryStage.setFullScreen(true);
+    					//}
     				}
     			}
     		});
@@ -1640,8 +1638,42 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.NUMPAD1)
     				{
-    					primaryStage.setScene(BonEN);
-    					primaryStage.setFullScreen(true);
+    					//if()
+    					//{
+    						Popup popup = new Popup();
+    						popup.show(primaryStage);
+    						
+    						Label la = new Label();
+    						la.setText("NO money");
+    						la.setFont(Font.font("Tahoma", 40));
+    						
+    						Button close =new Button("Sluiten  (A)");
+    						close.setOnKeyPressed(new EventHandler<KeyEvent>()
+    							{
+    								@Override
+    								public void handle(KeyEvent event)
+    								{
+    									if (event.getCode() == KeyCode.A)
+    									{
+    										popup.hide();
+    									}
+    								}
+    							});
+    						VBox vbox = new VBox(10);
+    						vbox.getChildren().addAll(la, close);
+    						
+    						int width = (int) Screen.getPrimary().getBounds().getWidth();
+    						int height = (int) Screen.getPrimary().getBounds().getHeight();
+    						popup.setX(width/2);
+    						popup.setY(height/2);
+    						popup.getContent().addAll(new Rectangle(500, 100, Color.AQUAMARINE), vbox);
+    					//}
+    					
+    					//else
+    					//{
+    						primaryStage.setScene(BonEN);
+    						primaryStage.setFullScreen(true);
+    					//}
     				}
     			}
     		});
@@ -1652,8 +1684,42 @@ public class Gui extends Application
     			{
     				if (event.getCode() == KeyCode.NUMPAD2)
     				{
-    					primaryStage.setScene(BonEN);
-    					primaryStage.setFullScreen(true);
+    					//if()
+    					//{
+    						Popup popup = new Popup();
+    						popup.show(primaryStage);
+    						
+    						Label la = new Label();
+    						la.setText("NO money");
+    						la.setFont(Font.font("Tahoma", 40));
+    						
+    						Button close =new Button("Sluiten  (A)");
+    						close.setOnKeyPressed(new EventHandler<KeyEvent>()
+    							{
+    								@Override
+    								public void handle(KeyEvent event)
+    								{
+    									if (event.getCode() == KeyCode.A)
+    									{
+    										popup.hide();
+    									}
+    								}
+    							});
+    						VBox vbox = new VBox(10);
+    						vbox.getChildren().addAll(la, close);
+    						
+    						int width = (int) Screen.getPrimary().getBounds().getWidth();
+    						int height = (int) Screen.getPrimary().getBounds().getHeight();
+    						popup.setX(width/2);
+    						popup.setY(height/2);
+    						popup.getContent().addAll(new Rectangle(500, 100, Color.AQUAMARINE), vbox);
+    					//}
+    					
+    					//else
+    					//{
+    						primaryStage.setScene(BonEN);
+    						primaryStage.setFullScreen(true);
+    					//}
     				}
     			}
     		});
